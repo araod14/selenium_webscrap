@@ -10,9 +10,9 @@ path = '/home/danel149/chromedriver'
 #Opciones de chrome
 options = webdriver.ChromeOptions()
 ##Estas linea solo para trabajar desde pdvsa
-options.add_argument('--disable-extensions')
-proxy = "10.172.31.3:8000"
-options.add_argument('--proxy-server=%s' % proxy)
+#options.add_argument('--disable-extensions')
+#proxy = "10.172.31.3:8000"
+#options.add_argument('--proxy-server=%s' % proxy)
 
 driver = webdriver.Chrome(path, chrome_options=options)
 
@@ -41,9 +41,17 @@ anzoategui = WebDriverWait(driver, 60).until(ec.element_to_be_clickable((By.XPAT
 anzoategui.click() 
 
 #label ciudad /html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/fieldset[4]/div[2]/div/button
-citylabel = WebDriverWait(driver, 60).until(ec.element_to_be_clickable((By.XPATH,'/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/fieldset[3]/div[2]/div/div[1]/div/div[2]/div/div[2]')))
-citylabel.click()
+citybutton = WebDriverWait(driver, 60).until(ec.element_to_be_clickable((By.XPATH,'/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/fieldset[4]/div[2]/div/button')))
+citybutton.click()
 
-#lecheria //*[@id="react-select-19-option-19"]/input
-lecheria = WebDriverWait(driver, 60).until(ec.element_to_be_clickable((By.XPATH,'/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/fieldset[3]/div[2]/div/div[1]/div/div[2]/div/div[2]')))
+
+#lecheria /html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/fieldset[4]/div[2]/div/div[1]/div/div[2]/div/div[20]/input
+lecheria =driver.find_element(By.XPATH,'/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[1]/div/div[2]/fieldset[4]/div[2]/div/div[1]/div/div[2]/div/div[20]/input')
+driver.execute_script("window.scrollTo(0,document.body.scrollHeight)",lecheria)
 lecheria.click()
+
+
+#//*[@id="main"]/div[1]/div[1]/h5
+totalresults = WebDriverWait(driver, 60).until(ec.element_to_be_clickable((By.XPATH,'//*[@id="main"]/div[1]/div[1]/h5')))
+totalresults.text()
+print(totalresults)
