@@ -55,9 +55,15 @@ time.sleep(5)
 ## Total de resultados  /html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div[1]/h5
 
 ## Tipo #main > div.row.mt-4 > div:nth-child(2) > div > div.d-flex.flex-wrap.flex-xxl-nowrap.justify-content-center > div.flex-grow-1.d-flex.flex-column.bd-highlight.mb-3.position-relative > div.text-truncate.text-capitalize.mb-0.small.pb-1.text-info.fw-bold
-tipovivienda = driver.find_element(By.CSS_SELECTOR, 'main > div.row.mt-4 > div:nth-child(2) > div > div.d-flex.flex-wrap.flex-xxl-nowrap.justify-content-center > div.flex-grow-1.d-flex.flex-column.bd-highlight.mb-3.position-relative > div.text-truncate.text-capitalize.mb-0.small.pb-1.text-info.fw-bold')
+tipovivienda = driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/a')
 tipovivienda = tipovivienda.text
+print(tipovivienda)
 
+## Precio  /html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[5]/div/h5
+precio = driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[5]/div/h5')
+precio = precio.text
+print(precio)
+"""
 ## Titulo #main > div.row.mt-4 > div:nth-child(2) > div > div.d-flex.flex-wrap.flex-xxl-nowrap.justify-content-center > div.flex-grow-1.d-flex.flex-column.bd-highlight.mb-3.position-relative > a
 titulo_vivienda = driver.find_element(By.CSS_SELECTOR, '#main > div.row.mt-4 > div:nth-child(2) > div > div.d-flex.flex-wrap.flex-xxl-nowrap.justify-content-center > div.flex-grow-1.d-flex.flex-column.bd-highlight.mb-3.position-relative > a')
 titulo_vivienda = titulo_vivienda.text
@@ -95,3 +101,4 @@ precio = precio.text
 ## Link  /html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[6]/div/div/div[2]/a[2]
 link = driver.find_element(By.XPATH, '/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[6]/div/div/div[2]/a[2]')
 link.text
+"""
