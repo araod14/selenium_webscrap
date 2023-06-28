@@ -55,50 +55,22 @@ time.sleep(5)
 ## Total de resultados  /html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[1]/div[1]/h5
 
 
-tipo = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[1]')
-tipo=tipo.text
-print(tipo)
-
-tipovivienda = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/a')
-tipovivienda = tipovivienda.text
-print(tipovivienda)
-
-precio = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[5]')
-precio = precio.text
-print(precio)
-
-ubicacion = driver.find_element(By.CSS_SELECTOR, '#main > div.row.mt-4 > div:nth-child(2) > div > div.d-flex.flex-wrap.flex-xxl-nowrap.justify-content-center > div.flex-grow-1.d-flex.flex-column.bd-highlight.mb-3.position-relative > div.text-muted.font-weight-light.text-truncate.small.m-0')
-ubicacion = ubicacion.text
-print(ubicacion)
-
-terreno = driver.find_element(By.CSS_SELECTOR,'#main > div.row.mt-4 > div:nth-child(2) > div > div.d-flex.flex-wrap.flex-xxl-nowrap.justify-content-center > div.flex-grow-1.d-flex.flex-column.bd-highlight.mb-3.position-relative > div.mt-2.text-muteds.text-truncate.small > span:nth-child(1) > span')
-terreno = terreno.text
-print(terreno)
-
-construccion = driver.find_element(By.CSS_SELECTOR,'#main > div.row.mt-4 > div:nth-child(2) > div > div.d-flex.flex-wrap.flex-xxl-nowrap.justify-content-center > div.flex-grow-1.d-flex.flex-column.bd-highlight.mb-3.position-relative > div.mt-2.text-muteds.text-truncate.small > span:nth-child(3) > span')
-construccion = construccion.text
-print(construccion)
-
-habitaciones = driver.find_element(By.XPATH,'//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[4]/span[1]')
-habitaciones = habitaciones.text
-print(habitaciones)
-
-banos = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[4]/span[2]')
-banos = banos.text
-print(banos)
-
-estacionamientos = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[4]/span[3]')
-estacionamientos = estacionamientos.text
-print(estacionamientos)
-
-pool=driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[4]/span[4]')
-pool = pool.text
+tipo = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[1]').text
+tipovivienda = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/a').text
+precio = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[5]').text
+ubicacion = driver.find_element(By.CSS_SELECTOR, '#main > div.row.mt-4 > div:nth-child(2) > div > div.d-flex.flex-wrap.flex-xxl-nowrap.justify-content-center > div.flex-grow-1.d-flex.flex-column.bd-highlight.mb-3.position-relative > div.text-muted.font-weight-light.text-truncate.small.m-0').text
+terreno = driver.find_element(By.CSS_SELECTOR,'#main > div.row.mt-4 > div:nth-child(2) > div > div.d-flex.flex-wrap.flex-xxl-nowrap.justify-content-center > div.flex-grow-1.d-flex.flex-column.bd-highlight.mb-3.position-relative > div.mt-2.text-muteds.text-truncate.small > span:nth-child(1) > span').text
+construccion = driver.find_element(By.CSS_SELECTOR,'#main > div.row.mt-4 > div:nth-child(2) > div > div.d-flex.flex-wrap.flex-xxl-nowrap.justify-content-center > div.flex-grow-1.d-flex.flex-column.bd-highlight.mb-3.position-relative > div.mt-2.text-muteds.text-truncate.small > span:nth-child(3) > span').text
+habitaciones = driver.find_element(By.XPATH,'//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[4]/span[1]').text
+banos = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[4]/span[2]').text
+estacionamientos = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[4]/span[3]').text
+link = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[6]/div/div/div[2]/a').get_attribute("href")
+pool=driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[4]/span[4]').text
 if pool == 'Piscina':
-    print("si tiene")
+    pool=True
 else:
-    print('no tiene =(')
-
-## Link  /html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[2]/div[2]/div/div[1]/div[2]/div[6]/div/div/div[2]/a[2]
-link = driver.find_element(By.XPATH, '//*[@id="main"]/div[2]/div[2]/div/div[1]/div[2]/div[6]/div/div/div[2]/a')
-link = link.get_attribute("href")
-print(link)
+    pool=False
+print(tipo, tipovivienda, precio, 
+      ubicacion, terreno, construccion, 
+      habitaciones, banos, estacionamientos, 
+      link, pool)
