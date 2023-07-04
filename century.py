@@ -50,19 +50,36 @@ driver.execute_script("window.scrollTo(0,document.body.scrollHeight)",lecheria)
 lecheria.click()
 time.sleep(5)
 
-    ## Datos a guardar
-casas = driver.find_elements(By.XPATH, '//div[@class="col scrollbar"]/div[@class="row mt-4"]/div[@class="col-md-6"]')
-for i in casas:
-    viviendas = driver.find_elements(By.XPATH, '//div[@class="d-flex flex-wrap flex-xxl-nowrap justify-content-center"]')
-    vivi = [vivienda.text for vivienda in viviendas]
+def info_vivienda():
+        ## Datos a guardar
+    casas = driver.find_elements(By.XPATH, '//div[@class="col scrollbar"]/div[@class="row mt-4"]/div[@class="col-md-6"]')
+    for casa in casas:
+        viviendas = driver.find_elements(By.XPATH, '//div[@class="d-flex flex-wrap flex-xxl-nowrap justify-content-center"]')
+        vivi = [vivienda.text for vivienda in viviendas]
+    return vivi
 
-    #links = driver.find_elements(By.XPATH, '//div[@class="col text-end"]/a')
-    #link = [link.get_attribute("href") for link in links]
+        #links = driver.find_elements(By.XPATH, '//div[@class="col text-end"]/a')
+        #link = [link.get_attribute("href") for link in links]
 
-#df = pd.DataFrame({"viviendas":ban})
-    #"construccion":construccion,
-    #"habitaciones":hab, "banos":bano, "estacionamientos":estacion,
-    #"link":link
+df = pd.DataFrame({"viviendas":info_vivienda()})
 
-#df.to_csv('viviendas_.csv', index=False)
-print(vivi)
+page2 = WebDriverWait(driver, 60).until(ec.element_to_be_clickable((By.XPATH,'/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[3]/div/ul/li[2]/a')))
+page2.click()
+df2 = pd.DataFrame({"viviendas":info_vivienda()})
+df = pd.concat([df, df2], axis=0)
+
+page3 = WebDriverWait(driver, 60).until(ec.element_to_be_clickable((By.XPATH,'/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[3]/div/ul/li[3]/a')))
+page3.click()
+df3 = pd.DataFrame({"viviendas":info_vivienda()})
+df = pd.concat([df, df3], axis=0)
+
+page4 = WebDriverWait(driver, 60).until(ec.element_to_be_clickable((By.XPATH,'/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[3]/div/ul/li[4]/a')))
+page4.click()
+df4 = pd.DataFrame({"viviendas":info_vivienda()})
+df = pd.concat([df, df4], axis=0)
+
+#page5 = WebDriverWait(driver, 60).until(ec.element_to_be_clickable((By.XPATH,'/html/body/div[2]/div/div/div/main/div/div[1]/div[2]/div/div[2]/div[3]/div/ul/li[5]/a')))
+#page5.click()
+
+df.to_csv('viviendas_totales.csv', index=False)
+print(df)
