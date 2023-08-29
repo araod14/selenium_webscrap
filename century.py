@@ -2,12 +2,14 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 import pandas as pd
 import time
 
 #Path de chromedriver
 path = '/home/danel149/chromedriver'
 
+service = Service()
 #Opciones de chrome
 options = webdriver.ChromeOptions()
 ##Estas linea solo para trabajar desde pdvsa
@@ -15,7 +17,7 @@ options = webdriver.ChromeOptions()
 #proxy = "10.172.31.3:8000"
 #options.add_argument('--proxy-server=%s' % proxy)
 
-driver = webdriver.Chrome(path, chrome_options=options)
+driver = webdriver.Chrome(service=service, options=options)
 
 #Iniciar el navegador
 driver.get('https://www.century21.com.ve/')
