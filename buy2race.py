@@ -26,29 +26,24 @@ buscarmoto.send_keys(moto)
 
 time.sleep(3)
 
-def info():
     ## Datos a guardar
-    result = []
-    links = driver.find_elements(By.XPATH, '//div[@class="df-card"]/a')
-    titles = driver.find_elements(By.XPATH, '//div[@class="df-card__title"]')
-    availitys = driver.find_elements(By.XPATH, '//div[@class="df-card__pricing"]/span/span')
-    prices = driver.find_elements(By.XPATH, '//span[@class="df-card__price "]')
-        
-    title_l = [title.text for title in titles]
-    availities_l = [availity.get_attribute("class") for availity in availitys]
-    prices_l = [price.text for price in prices]
-    links_to = [link.get_attribute("href") for link in links]
+result = []
+links = driver.find_elements(By.XPATH, '//div[@class="df-card"]/a')
+titles = driver.find_elements(By.XPATH, '//div[@class="df-card__title"]')
+availitys = driver.find_elements(By.XPATH, '//div[@class="df-card__pricing"]/span/span')
+prices = driver.find_elements(By.XPATH, '//span[@class="df-card__price "]')
 
-    result.extend(title_l)
-    result.extend(availities_l)
-    result.extend(prices_l)
-    result.extend(links_to)
 
-    return result
+    # Añadir los valores a la lista de resultados
+for i in range(len(links)):
+    result.append({
+        "Title": titles[i].text,
+        "Availity": availitys[i].get_attribute("class"),
+        "Price": prices[i].text,
+        "Link": links[i].get_attribute("href")
+    })
 
-df = pd.DataFrame({"Yamaha XTZ 700 TENERE":info()})
-
+# Crear el dataframe
+df = pd.DataFrame(result)
 df.to_csv('ymaha_xtz_700_tenere_raw.csv', index=False)
-
 print(df)
-
