@@ -7,6 +7,7 @@ from selenium.webdriver.chrome.service import Service
 import pandas as pd
 
 import time
+import requests
 
 
 service = Service()
@@ -16,7 +17,7 @@ driver = webdriver.Chrome(service=service, options=options)
 #Iniciar el navegador
 driver.get('https://buy2race.com/es/')
 
-moto='Yamaha XTZ 700 TENERE'
+moto='Aprilia Tuareg 660'
 
 buscador = WebDriverWait(driver, 60).until(ec.element_to_be_clickable((By.XPATH,'//*[@id="search_widget"]/form/input[2]')))
 buscador.click()#send_keys(moto)
@@ -32,18 +33,31 @@ links = driver.find_elements(By.XPATH, '//div[@class="df-card"]/a')
 titles = driver.find_elements(By.XPATH, '//div[@class="df-card__title"]')
 availitys = driver.find_elements(By.XPATH, '//div[@class="df-card__pricing"]/span/span')
 prices = driver.find_elements(By.XPATH, '//span[@class="df-card__price "]')
-
+image_urls = driver.find_elements(By.XPATH, '//figure/img')
 
     # Añadir los valores a la lista de resultados
 for i in range(len(links)):
+    image_url = image_urls[i].get_attribute("src")
+    link = links[i].get_attribute("href")
     result.append({
         "Title": titles[i].text,
         "Availity": availitys[i].get_attribute("class"),
         "Price": prices[i].text,
+        "Image": image_urls[i].get_attribute("src"),
         "Link": links[i].get_attribute("href")
     })
+    # Descargar la imagen
+    response = requests.get(image_url)
+    if response.status_code == 200:
+        # Guardar la imagen en un archivo
+        image_file = open(f"imagen_{i}.jpg", "wb")
+        image_file.write(response.content)
+        image_file.close()
+
+    else:
+        print("No se pudo descargar la imagen del enlace:")
 
 # Crear el dataframe
 df = pd.DataFrame(result)
-df.to_csv('ymaha_xtz_700_tenere_raw.csv', index=False)
+df.to_csv('Aprilia Tuareg 660.csv', index=False)
 print(df)
